@@ -8,6 +8,16 @@ const app = Vue.createApp({
         }
     },
 
+    computed: {
+        boxAClass() {
+            return {active : this.boxASelected};
+        },
+        
+        boxBClass() {
+            return {active : this.boxBSelected};
+        }
+    },
+
     methods: {
         boxSelected(box) {
             if (box == 'A') {
