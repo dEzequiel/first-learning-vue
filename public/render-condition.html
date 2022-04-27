@@ -21,8 +21,8 @@
       <input type="text" v-model="inputedGoal" />
       <button @click="addGoal">Add Goal</button>
       <p v-show="checkGoalsLength">No goals have been added yet - please start adding some!</p>
-      <ul v-for="goal in goals">
-        <li>{{ goal }}</li>
+      <ul>
+        <li v-for="(goal, index) in goals" @click="removeGoal(index)">{{ goal }} - {{ index }}</li>
       </ul>
 
       <!-- <ul>
