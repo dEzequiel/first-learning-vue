@@ -65,11 +65,20 @@ const app = Vue.createApp({
             if(this.attackCounter < 0) {
                 this.attackCounter = 0;
             }
+        },
+
+        heal() {
+
+            if(this.checkPlayerAlive() && this.playerHealth < 100) {
+                this.playerHealth += getRandomNumber(8, 20);
+                this.attackPlayer();
+                this.attackCounter++;
+            }
         }
     },
 
     computed: {
-        reduceMonsterHealth() {
+        modifyMonsterHealthBar() {
             if (this.monsterHealth <= 0) {
                 return {width: 0 + '%'};
             }
@@ -77,7 +86,12 @@ const app = Vue.createApp({
             return {width: this.monsterHealth + '%'};
         },
 
-        reducePlayerHealth() {
+        modifyPlayerHealthBar() {
+
+            if(this.playerHealth > 100) {
+                return {width: 100 + '%'};
+            }
+
             if(this.playerHealth <= 0) {
                 return {width: 0 + '%'};
             }
