@@ -13,18 +13,20 @@ const app = Vue.createApp({
             monsterHealth: 100,
             playerHealth: 100,
             attackCounter: 0,
-            winner: null
+            winner: null,
         };
     },
 
     methods: {
 
         attackPlayer() {
-            return this.playerHealth -= getRandomNumber(8, 15);
+            const damage = getRandomNumber(8, 15)
+            return this.playerHealth -= damage;
         },
 
         attackMonster() {
-            return this.monsterHealth -= getRandomNumber(5, 12);
+            const damage = getRandomNumber(5, 12);
+            return this.monsterHealth -= damage;
 
         },
 
@@ -85,8 +87,7 @@ const app = Vue.createApp({
 
         surrender() {
             this.playerHealth = 0
-            this.winner = 'Monster'
-            return this.stablishWinner();
+            this.winner = 'Monster';
         },
 
         startNewGame() {
@@ -128,12 +129,12 @@ const app = Vue.createApp({
 
             if (!checkEntitieAlive(this.playerHealth)) {
                 this.winner = 'Monster'
-                return winner + ' won!'
+                return this.winner + ' won!'
             }
 
             if(!checkEntitieAlive(this.monsterHealth)) {
                 this.winner = 'Player'
-                return winner + ' won!'
+                return this.winner + ' won!'
             }
 
 
