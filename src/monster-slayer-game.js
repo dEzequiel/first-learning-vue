@@ -13,6 +13,7 @@ const app = Vue.createApp({
             monsterHealth: 100,
             playerHealth: 100,
             attackCounter: 0,
+            winner: null
         };
     },
 
@@ -27,13 +28,6 @@ const app = Vue.createApp({
 
         },
 
-        // checkPlayerAlive() {
-        //     return checkEntitieAlive(this.playerHealth);
-        // },
-
-        // checkMonsterAlive() {
-        //     return checkEntitieAlive(this.monsterHealth);
-        // },
 
         attack() {
 
@@ -89,6 +83,12 @@ const app = Vue.createApp({
             }
         },
 
+        surrender() {
+            this.playerHealth = 0
+            this.winner = 'Monster'
+            return this.stablishWinner();
+        },
+
         startNewGame() {
             this.playerHealth = 100;
             this.monsterHealth = 100;
@@ -122,15 +122,18 @@ const app = Vue.createApp({
         stablishWinner() {
 
             if(!checkEntitieAlive(this.monsterHealth) && !checkEntitieAlive(this.playerHealth)) {
+                this.winer = null;
                 return "It's a draw!"
             }
 
             if (!checkEntitieAlive(this.playerHealth)) {
-                return 'Monster won!'
+                this.winner = 'Monster'
+                return winner + ' won!'
             }
 
             if(!checkEntitieAlive(this.monsterHealth)) {
-                return 'Player won!'
+                this.winner = 'Player'
+                return winner + ' won!'
             }
 
 
