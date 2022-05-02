@@ -28,20 +28,22 @@
         <div class="healthbar__value" :style="modifyPlayerHealthBar"></div>
       </div>
     </section>
-    <section id="game-over" class="container" v-show="stablishWinner">
+    <section id="game-over" class="container" v-if="stablishWinner">
       <h2>Game over!</h2>
       <h3>{{ stablishWinner }}</h3>
-      <button @click="startNewGame()">Start New Game</button>
+      <button @click="startNewGame()">Start new game!</button>
     </section>
-    <section id="controls">
+    <section id="controls" v-else="!stablishWinner">
       <button @click="attack()">ATTACK</button>
       <button @click="doSpecialAttack()">SPECIAL ATTACK</button>
       <button @click="heal()">HEAL</button>
-      <button @click="heal()">SURRENDER</button>
+      <button @click="surrender()">SURRENDER</button>
     </section>
     <section id="log" class="container">
       <h2>Battle Log</h2>
-      <ul></ul>
+      <ul>
+        
+      </ul>
     </section>
   </div>
 </body>
