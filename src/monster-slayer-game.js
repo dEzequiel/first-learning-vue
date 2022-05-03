@@ -14,18 +14,21 @@ const app = Vue.createApp({
             playerHealth: 100,
             attackCounter: 0,
             winner: null,
+            logMessages: []
         };
     },
 
     methods: {
 
         attackPlayer() {
-            const damage = getRandomNumber(8, 15)
+            const damage = getRandomNumber(8, 15);
+            this.addLogMessages('Monster', 'attacks', damage);
             return this.playerHealth -= damage;
         },
 
         attackMonster() {
             const damage = getRandomNumber(5, 12);
+            this.addLogMessages('Player', 'attacks', damage);
             return this.monsterHealth -= damage;
 
         },
@@ -79,7 +82,9 @@ const app = Vue.createApp({
             }
 
             if (checkEntitieAlive(this.playerHealth) && this.playerHealth < 100) {
-                this.playerHealth += getRandomNumber(8, 20);
+                const healValue = getRandomNumber(8, 20);
+                this.playerHealth += healValue;
+                this.addLogMessages('Player', 'heals', healValue);
                 this.attackPlayer();
                 this.attackCounter++;
             }
@@ -88,12 +93,22 @@ const app = Vue.createApp({
         surrender() {
             this.playerHealth = 0
             this.winner = 'Monster';
+
         },
 
         startNewGame() {
             this.playerHealth = 100;
             this.monsterHealth = 100;
             this.attackCounter = 0;
+            this.logMessages = [];
+        },
+
+        addLogMessages(who, what, value) {
+            this.logMessages.unshift({
+                actionBy: who,
+                actionWhat: what,
+                actionValue: value
+            })
         }
     },
 
@@ -138,7 +153,7 @@ const app = Vue.createApp({
             }
 
 
-        }
+        },
 
     },
 
