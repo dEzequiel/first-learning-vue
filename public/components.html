@@ -18,14 +18,7 @@
     </header>
     <section id="app">
       <ul>
-        <li v-for="contact in contacts" :key="contact.id">
-          <h2>{{ contact.name }}</h2>
-          <button @click="showDetails()">{{ hideOrShowDetails }}</button>
-          <ul v-if="isVisible">
-            <li><strong>Phone: </strong> {{contact.phone}} </li>
-            <li><strong>Email: </strong> {{contact.email }}</li>
-          </ul>
-        </li>
+        <contact-user></contact-user>
       </ul>
     </section>
   </body>
