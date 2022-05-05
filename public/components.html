@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/components.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="/src/components.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>FriendList</h1>
+    </header>
+    <section id="app">
+      <ul>
+        <li v-for="contact in contacts" :key="contact.id">
+          <h2>{{ contact.name }}</h2>
+          <button @click="showDetails()">{{ hideOrShowDetails }}</button>
+          <ul v-if="isVisible">
+            <li><strong>Phone: </strong> {{contact.phone}} </li>
+            <li><strong>Email: </strong> {{contact.email }}</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
